@@ -13,15 +13,19 @@ import './App.css'; // App.css 파일 추가
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedInUserID, setLoggedInUserID] = useState(null);
 
-  const handleLogin = () => {
+  const handleLogin = (userID) => {
     // 로그인 성공 시 호출되는 함수
     setIsLoggedIn(true);
+    setLoggedInUserID(userID); // 로그인한 사용자의 ID를 상태로 저장
   };
+  
 
   const handleLogout = () => {
     // 로그아웃 시 호출되는 함수
     setIsLoggedIn(false);
+    setLoggedInUserID(null);
   };
 
   return (
@@ -31,7 +35,7 @@ const App = () => {
         {isLoggedIn ? (
           <nav>
             <ul>
-              <li><Link to="/chat">채팅</Link></li>
+              <li><button><Link to="/chat">채팅</Link></button></li>
               <li><button onClick={handleLogout}>로그아웃</button></li>
             </ul>
           </nav>
@@ -50,11 +54,11 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route
           path="/login"
-          element={<Login onLoginSuccess={handleLogin} />}
+          element={<Login onLoginSuccess={handleLogin}/>}
         />
         <Route
           path="/chat"
-          element={isLoggedIn ? <Chat /> : <Navigate to="/login" />}
+          element={isLoggedIn ? <Chat userID={loggedInUserID} /> : <Navigate to="/login" />}
         />
       </Routes>
     </div>

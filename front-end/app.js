@@ -196,6 +196,42 @@ app.get('/api/youtube', (req, res) => {
     externalReq.end();
 });
 
+// 새로운 방 만들기
+app.post('/api/newroom', (req, res) => {
+    console.log(req.body);
+  
+    const options = {
+        hostname: '192.249.29.4',
+        port: 8080,
+        path: '/newroom',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    };
+  
+    const externalReq = http.request(options, (externalRes) => {
+        let data = '';
+  
+        externalRes.on('data', (chunk) => {
+            data += chunk;
+        });
+  
+        externalRes.on('end', () => {
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ responseData: data }));
+        });
+    });
+  
+    externalReq.on('error', (error) => {
+        console.error(`External request error: ${error.message}`);
+        res.status(500).json({ error: 'Internal Server Error' });
+    });
+  
+    externalReq.write(JSON.stringify(req.body));
+    externalReq.end();
+  });
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
