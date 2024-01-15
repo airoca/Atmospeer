@@ -39,5 +39,11 @@ public class RoomController {
         return roomService.joinRoom(newRoomUser);
     }
 
+    //방 삭제하기
+    @DeleteMapping("/eraseroom/{roomId}")
+    public void eraseRoom(@PathVariable Integer roomId) {
+        roomService.eraseRoom(roomId);
+    }
+
 
 }

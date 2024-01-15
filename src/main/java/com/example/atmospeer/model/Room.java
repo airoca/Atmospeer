@@ -10,18 +10,18 @@ import lombok.Getter;
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer room_id;
+    private Integer roomId;
     @Getter
     private String masterUser;
     @Getter
     private String url;
 
     public Integer getRoomId() {
-        return room_id;
+        return roomId;
     }
 
-    public void setRoomId(Integer room_id) {
-        this.room_id = room_id;
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
     }
 
     public void setMasterUser(String masterUser) {

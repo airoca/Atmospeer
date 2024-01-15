@@ -8,24 +8,24 @@ import jakarta.persistence.IdClass;
 @IdClass(RoomUserId.class) //RoomUserId를 복합 키로 사용
 public class RoomUser {
     @Id
-    private Integer room_id;
+    private Integer roomId;
     @Id
-    private String user_id;
+    private String userId;
 
-    public void setRoomId(Integer room_id) {
-        this.room_id = room_id;
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
     }
 
-    public void setUserId(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public Integer getRoomId() {
-        return room_id;
+        return roomId;
     }
 
     public String getUserId() {
-        return user_id;
+        return userId;
     }
 
 }

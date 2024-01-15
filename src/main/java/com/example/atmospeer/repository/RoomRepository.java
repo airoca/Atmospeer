@@ -10,7 +10,7 @@ import java.util.List;
 public interface RoomRepository extends JpaRepository<Room, Long> {
     List<Room> findByMasterUser(String masterUserId);
 
-    @Query("SELECT r FROM Room r JOIN RoomUser ru ON r.room_id = ru.room_id WHERE ru.user_id = :userId")
+    @Query("SELECT r FROM Room r JOIN RoomUser ru ON r.roomId = ru.roomId WHERE ru.userId = :userId")
     List<Room> findRoomsByUserId(@Param("userId") String userId);
 
 

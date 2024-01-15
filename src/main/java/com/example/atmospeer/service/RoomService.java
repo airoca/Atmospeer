@@ -4,6 +4,7 @@ import com.example.atmospeer.model.Room;
 import com.example.atmospeer.model.RoomUser;
 import com.example.atmospeer.repository.RoomRepository;
 import com.example.atmospeer.repository.RoomUserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,12 @@ public class RoomService {
 
     public RoomUser joinRoom(RoomUser newRoomUser) {
         return roomUserRepository.save(newRoomUser);
+    }
+
+    @Transactional
+    public void eraseRoom(Integer roomId) {
+        roomUserRepository.deleteByRoomId(roomId);
+        roomRepository.deleteById(Long.valueOf(roomId));
     }
 
 }
