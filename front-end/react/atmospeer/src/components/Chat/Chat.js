@@ -62,7 +62,6 @@ export default function Chat({ userID }) {
       const youtubeURL =
         data2.responseData &&
         data2.responseData.match(/URL: (https:\/\/www\.youtube\.com\/watch\?v=[^\s]+)/)?.[1];
-      console.log(youtubeURL);
       setURL(youtubeURL || 'N/A');
     } catch (error) {
       console.error('Error during fetch:', error);
@@ -97,19 +96,17 @@ export default function Chat({ userID }) {
       {youtubeURL && (
         <div className="YoutubeContainer">
           {/* Youtube 영상 띄우기 */}
-          {console.log(youtubeURL)}
           <Youtube youtubeTitle={youtubeTitle} youtubeURL={youtubeURL} positionStyles={positionStyles}/>
         </div>
       )}
 
+      
       <div style={{ width: '100px', height: '50px' }}></div>
       {/* 소속되어 있는 room 띄우기 */}
       <Room userID={userID} youtubeURL={youtubeURL} />
 
 
-      <div style={{ width: '100px', height: '50px' }}></div>
-      <hr style={{ width: '80%' }} />
-      <div style={{ width: '100px', height: '50px' }}></div>
+      
       
     </div>
   );

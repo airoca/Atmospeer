@@ -198,7 +198,6 @@ app.get('/api/youtube', (req, res) => {
 
 // 새로운 방 만들기
 app.post('/api/newroom', (req, res) => {
-    console.log(req.body);
   
     const options = {
         hostname: '192.249.29.4',
@@ -240,6 +239,34 @@ app.get('/api/myroom', (req, res) => {
       hostname: '192.249.29.4',
       port: 8080,
       path: `/myroom?masterUserId=${encodeURIComponent(masterUserID)}`,
+      method: 'GET'
+    };
+  
+    const externalReq = http.request(options, (externalRes) => {
+      let data = '';
+  
+      externalRes.on('data', (chunk) => {
+        data += chunk;
+      });
+  
+      externalRes.on('end', () => {
+        // 받은 데이터를 다시 클라이언트에게 응답
+        res.json({ responseData: data });
+        console.log(data);
+      });
+    });
+  
+    externalReq.end();
+  });
+
+  // 특정 user가 소속된 모든 방 정보 가져오기
+app.get('/api/joiningroom', (req, res) => {
+    const userId = req.query.userId;
+    console.log('User ID: ', userId);
+    const options = {
+      hostname: '192.249.29.4',
+      port: 8080,
+      path: `/joiningroom?userId=${encodeURIComponent(userId)}`,
       method: 'GET'
     };
   
