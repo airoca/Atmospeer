@@ -97,6 +97,7 @@ export default function Chat({ userID }) {
       {youtubeURL && (
         <div className="YoutubeContainer">
           {/* Youtube 영상 띄우기 */}
+          {console.log(youtubeURL)}
           <Youtube youtubeTitle={youtubeTitle} youtubeURL={youtubeURL} positionStyles={positionStyles}/>
         </div>
       )}

@@ -13,7 +13,7 @@ export default function Youtube({ youtubeTitle, youtubeURL, positionStyles }) {
     return (
       <div className='Youtube' style={positionStyles}>
         <div className='YoutubeTitle'>
-          추천 플레이리스트: {youtubeTitle}
+          {youtubeTitle}
         </div>
         <div style={{ width: '100px', height: '10px' }}></div>
         {youtubeURL !== 'N/A' && (

@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // parse application/json
 app.use(bodyParser.json())
 
-
+// 모든 유저 정보 가져오기
 app.get('/api/user', (req, res) => {
   const options = {
     hostname: '192.249.29.4',
@@ -229,6 +229,34 @@ app.post('/api/newroom', (req, res) => {
     });
   
     externalReq.write(JSON.stringify(req.body));
+    externalReq.end();
+  });
+
+// 특정 user가 방장인 모든 방 정보 가져오기
+app.get('/api/myroom', (req, res) => {
+    const masterUserID = req.query.masterUserId;
+    console.log('Master User ID: ', masterUserID);
+    const options = {
+      hostname: '192.249.29.4',
+      port: 8080,
+      path: `/myroom?masterUserId=${encodeURIComponent(masterUserID)}`,
+      method: 'GET'
+    };
+  
+    const externalReq = http.request(options, (externalRes) => {
+      let data = '';
+  
+      externalRes.on('data', (chunk) => {
+        data += chunk;
+      });
+  
+      externalRes.on('end', () => {
+        // 받은 데이터를 다시 클라이언트에게 응답
+        res.json({ responseData: data });
+        console.log(data);
+      });
+    });
+  
     externalReq.end();
   });
 
