@@ -9,3 +9,7 @@ spring:
 
 chatgpt:
   api-key: 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
+
+youtube:
+  api:
+    key: AIzaSyCHMPzbV_1zONqcwOYkfucxAAPATywCb2s
