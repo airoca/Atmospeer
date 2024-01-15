@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Youtube({ youtubeURL }) {
     // YouTube API Key
-    const apiKey = 'AIzaSyCHMPzbV_1zONqcwOYkfucxAAPATywCb2s';
+    const apiKey = '';
   
     // 동영상 ID 추출
     const videoId = youtubeURL.split('v=')[1];
