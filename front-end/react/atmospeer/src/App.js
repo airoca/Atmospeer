@@ -1,90 +1,68 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import Login from './components/Login/Login';
+import Signup from './components/Login/Singup';
+import Chat from './components/Chat/Chat';
+import { Routes, Route, Link, Navigate } from 'react-router-dom';
+import './App.css'; // App.css 파일 추가
 
-function App() {
-  const [data, setData] = useState(null);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [id, setID] = useState(null);
-  const [loginAttemptCount, setLoginAttemptCount] = useState(0);
+// const Home = () => (
+//   <div>
+//     <h2>AtmosPEER</h2>
+//   </div>
+// );
 
-  // 유저 정보 전체를 받아오는 부분
-  useEffect(() => {
-    const fetchData = async () => {
-      try{
-        const response = await fetch('http://localhost:3001/api/user');
-        const result = await response.json();
-        const parsedData = JSON.parse(result.responseData);
-        setData(parsedData);
-      }
-      catch(error){
-        console.error("데이터 로딩 실패");
-      }
-    };
-    fetchData();
-  }, []);
+const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedInUserID, setLoggedInUserID] = useState(null);
 
-  // 로그인 정보를 입력하면, 서버에 보내서 존재하는 정보인지 처리하는 부분
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
-    const id = e.target.id.value; 
-    setID(id);
-    const password = e.target.pw.value;
-    
-    try {
-        const response = await fetch(`http://localhost:3001/api/login?id=${encodeURIComponent(id)}&password=${encodeURIComponent(password)}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        });
+  const handleLogin = (userID) => {
+    // 로그인 성공 시 호출되는 함수
+    setIsLoggedIn(true);
+    setLoggedInUserID(userID); // 로그인한 사용자의 ID를 상태로 저장
+  };
+  
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+  const handleLogout = () => {
+    // 로그아웃 시 호출되는 함수
+    setIsLoggedIn(false);
+    setLoggedInUserID(null);
+  };
 
-        const data = await response.json();
-        console.log('App.js response', data);
-        const parsedData = JSON.parse(data.responseData);
-        setIsSuccess(parsedData);
-        setLoginAttemptCount((prevCount) => prevCount + 1);
-
-    } catch (error) {
-        console.error('Error during fetch:', error);
-    }
-};
-
-
- // 화면에 출력되는 내용
   return (
     <div className="App">
-      <h1>AtmosPEER</h1>
+      <header>
+        <h1><Link to="/">AtmosPEER</Link></h1>
+        {isLoggedIn ? (
+          <nav>
+            <ul>
+              <li><button><Link to="/chat">채팅</Link></button></li>
+              <li><button onClick={handleLogout}>로그아웃</button></li>
+            </ul>
+          </nav>
+        ) : (
+          <nav>
+            <ul>
+              <li><button><Link to="/login">로그인</Link></button></li>
+              <li><button><Link to="/signup">회원가입</Link></button></li>
+            </ul>
+          </nav>
+        )}
+      </header>
 
-      {/* 로그인 form */}
-      <form onSubmit={onSubmitHandler}>
-        <input name = 'id'/>
-        <input name = 'pw'/>
-        <input type='submit' value='로그인'/>
-      </form>
-
-      {/* 정보 출력: 로그인 성공하면 해당 유저의 정보를 출력하도록 */}
-      {isSuccess ? (
-      <div>
-        <p>로그인에 성공했습니다.</p>
-        {data
-          .filter((user) => user.id === id) // Replace loggedInUserId with the actual logged-in user's id
-          .map((userData) => (
-          <div key={userData.id}>
-            <div>{userData.id}</div>
-            <div>{userData.password}</div>
-            <div>{userData.name}</div>
-          </div>
-        ))}
-      </div>
-    ) : (
-      <p>{loginAttemptCount === 0 ? '로그인하세요.' : '로그인에 실패했습니다.'}</p>
-    )}
+      <Routes>
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/login"
+          element={<Login onLoginSuccess={handleLogin}/>}
+        />
+        <Route
+          path="/chat"
+          element={isLoggedIn ? <Chat userID={loggedInUserID} /> : <Navigate to="/login" />}
+        />
+      </Routes>
     </div>
   );
-
 };
 
 export default App;
