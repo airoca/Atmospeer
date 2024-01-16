@@ -27,11 +27,6 @@ export default function Header({ isLoggedIn, handleLogout }) {
             <nav>
               <ul>
                 <li>
-                  <button>
-                    <Link to="/chat">AtmosPEER</Link>
-                  </button>
-                </li>
-                <li>
                 <Link to="/"><button onClick={handleLogout}>로그아웃</button></Link>
                 </li>
               </ul>
