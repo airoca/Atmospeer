@@ -15,6 +15,10 @@ public class Room {
     private String masterUser;
     @Getter
     private String url;
+    @Getter
+    private String roomName;
+    @Getter
+    private String roomImage;
 
     public Integer getRoomId() {
         return roomId;
@@ -30,6 +34,14 @@ public class Room {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public void setRoomName(String roomname) {
+        this.roomName = roomname;
+    }
+
+    public void setRoomImage(String roomimage) {
+        this.roomImage = roomimage;
     }
 
 }

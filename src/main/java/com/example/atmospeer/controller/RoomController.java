@@ -3,10 +3,15 @@ package com.example.atmospeer.controller;
 import com.example.atmospeer.model.Room;
 import com.example.atmospeer.model.RoomUser;
 import com.example.atmospeer.model.RoomUserId;
+import com.example.atmospeer.model.User;
 import com.example.atmospeer.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.atmospeer.repository.RoomUserRepository;
+import com.example.atmospeer.repository.UserRepository;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -45,5 +50,9 @@ public class RoomController {
         roomService.eraseRoom(roomId);
     }
 
+    @GetMapping("/members")
+    public List<User> getRoomMembers(@RequestParam Integer roomId) {
+        return roomService.getUsersInRoom(roomId);
+    }
 
 }
