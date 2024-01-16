@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Youtube from '../Youtube/Youtube';
 import Room from '../Room/Room';
 import TextField from '@mui/material/TextField';
@@ -8,6 +8,16 @@ export default function Chat({ userID }) {
   const [youtubeURL, setURL] = useState('');
   const [youtubeTitle, setTitle] = useState('');
   const [imgURL, setImgURL] = useState('');
+
+  useEffect(() => {
+    // 페이지가 처음 마운트될 때와 unmount될 때 초기화 작업 수행
+    return () => {
+      setMessage('');
+      setURL('');
+      setTitle('');
+      setImgURL('');
+    };
+  }, []);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
