@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from './logo.png';
-import './Header.css'; // Import your CSS file for styling
+import './Header.css';
 
 export default function Header({ isLoggedIn, handleLogout }) {
 
@@ -15,8 +15,7 @@ export default function Header({ isLoggedIn, handleLogout }) {
                     {isLoggedIn ? (
                         <nav>
                             <ul>
-                                <li><button><Link to="/chat">AtmosPEER</Link></button></li>
-                                <li><button onClick={handleLogout}>로그아웃</button></li>
+                                <li><button onClick={handleLogout}><Link to="/">로그아웃</Link></button></li>
                             </ul>
                         </nav>
                     ) : (

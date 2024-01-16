@@ -28,14 +28,15 @@ const App = () => {
 
   return (
     <div className="App">
-      {/* Show Header component for all routes except MainScreen */}
       {location.pathname !== '/' && (
         <Header isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
       )}
 
       <Routes>
-        <Route path="/" element={<MainScreen />} />
-        {/* Show login page when image is clicked */}
+      <Route
+          path="/"
+          element={<MainScreen isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>}
+        />
             <Route path="/chat" element={<Chat userID={loggedInUserID} />} />
             <Route path="/signup" element={<Signup />} />
             {/* RoomDetail 페이지에 대한 라우트 */}
