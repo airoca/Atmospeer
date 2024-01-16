@@ -130,6 +130,7 @@ const Room = ({ userID, youtubeURL, imgURL }) => {
       // Update the rooms state to reflect the deletion
       setRooms((prevRooms) => prevRooms.filter((room) => room.roomId !== roomId));
       console.log('AtmosPEER Deleted:', roomId);
+      
     } catch (error) {
       console.error('Delete AtmosPEER error:', error.message);
     }
