@@ -46,17 +46,17 @@ const RoomDetail = () => {
     fetchDetails();
   }, [room.roomId]);
 
-  const containerStyle = {
-    backgroundImage: `url(${room.roomImage})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    height: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'white',
-  };
+  // const containerStyle = {
+  //   backgroundImage: `url(${room.roomImage})`,
+  //   backgroundSize: 'cover',
+  //   backgroundPosition: 'center',
+  //   height: '300vh',
+  //   display: 'flex',
+  //   flexDirection: 'column',
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   color: 'white',
+  // };
 
   const positionStyles = {
     display: 'flex',
@@ -92,7 +92,8 @@ const RoomDetail = () => {
   };
 
   return (
-    <div style={containerStyle}>
+    // <div style={containerStyle}>
+    <div>
       <h1>Room Detail</h1>
       <p>Room ID: {room.roomId}</p>
       <p>Room name: {room.roomName}</p>
