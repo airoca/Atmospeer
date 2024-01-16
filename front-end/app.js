@@ -16,7 +16,7 @@ app.use(bodyParser.json())
 // 모든 유저 정보 가져오기
 app.get('/api/user', (req, res) => {
   const options = {
-    hostname: '192.249.29.4',
+    hostname: '192.249.29.33',
     port: 8080,
     path: '/users',
     method: 'GET'
@@ -38,7 +38,7 @@ app.get('/api/user', (req, res) => {
 
   externalReq.end();
 });
-
+4192
 app.use(express.urlencoded({
     extended: true
 }))
@@ -52,7 +52,7 @@ app.get('/api/login', (req, res) => {
     const password = req.query.password;
 
     const options = {
-        hostname: '192.249.29.4',
+        hostname: '192.249.29.33',
         port: 8080,
         path: `/login?id=${encodeURIComponent(id)}&password=${encodeURIComponent(password)}`,
         method: 'GET',
@@ -91,7 +91,7 @@ app.post('/api/register', (req, res) => {
   console.log(req.body);
 
   const options = {
-      hostname: '192.249.29.4',
+      hostname: '192.249.29.33',
       port: 8080,
       path: '/register',
       method: 'POST',
@@ -126,7 +126,7 @@ app.post('/api/register', (req, res) => {
 app.post('/api/send', (req, res) => {
 
   const options = {
-      hostname: '192.249.29.4',
+      hostname: '192.249.29.33',
       port: 8080,
       path: '/send',
       method: 'POST',
@@ -163,7 +163,7 @@ app.get('/api/youtube', (req, res) => {
 
     const message = req.query.keyword;
     const options = {
-        hostname: '192.249.29.4',
+        hostname: '192.249.29.33',
         port: 8080,
         path: `/youtube?keyword=${encodeURIComponent(message)}`,
         method: 'GET',
@@ -200,7 +200,7 @@ app.get('/api/youtube', (req, res) => {
 app.post('/api/newroom', (req, res) => {
   
     const options = {
-        hostname: '192.249.29.4',
+        hostname: '192.249.29.33',
         port: 8080,
         path: '/newroom',
         method: 'POST',
@@ -236,7 +236,7 @@ app.get('/api/myroom', (req, res) => {
     const masterUserID = req.query.masterUserId;
     console.log('Master User ID: ', masterUserID);
     const options = {
-      hostname: '192.249.29.4',
+      hostname: '192.249.29.33',
       port: 8080,
       path: `/myroom?masterUserId=${encodeURIComponent(masterUserID)}`,
       method: 'GET'
@@ -264,7 +264,7 @@ app.get('/api/joiningroom', (req, res) => {
     const userId = req.query.userId;
     console.log('User ID: ', userId);
     const options = {
-      hostname: '192.249.29.4',
+      hostname: '192.249.29.33',
       port: 8080,
       path: `/joiningroom?userId=${encodeURIComponent(userId)}`,
       method: 'GET'
@@ -286,6 +286,35 @@ app.get('/api/joiningroom', (req, res) => {
   
     externalReq.end();
   });
+
+// 방 삭제하기
+app.delete('/api/eraseroom/:roomId', (req, res) => {
+    const roomId = req.params.roomId;  // Use req.params to get the parameter from the URL
+    console.log('Room ID: ', roomId);
+    const options = {
+      hostname: '192.249.29.33',
+      port: 8080,
+      path: `/eraseroom/${roomId}`,
+      method: 'DELETE',
+    };
+  
+    const externalReq = http.request(options, (externalRes) => {
+      let data = '';
+  
+      externalRes.on('data', (chunk) => {
+        data += chunk;
+      });
+  
+      externalRes.on('end', () => {
+        // 받은 데이터를 다시 클라이언트에게 응답
+        res.json({ responseData: data });
+        console.log(data);
+      });
+    });
+  
+    externalReq.end();
+  });
+  
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

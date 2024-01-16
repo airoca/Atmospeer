@@ -4,6 +4,7 @@ import Signup from './components/Login/Singup';
 import Chat from './components/Chat/Chat';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import './App.css'; // App.css 파일 추가
+import RoomDetail from './components/Room/RoomDetail';
 
 // const Home = () => (
 //   <div>
@@ -35,7 +36,7 @@ const App = () => {
         {isLoggedIn ? (
           <nav>
             <ul>
-              <li><button><Link to="/chat">채팅</Link></button></li>
+              <li><button><Link to="/chat">AtmosPEER</Link></button></li>
               <li><button onClick={handleLogout}>로그아웃</button></li>
             </ul>
           </nav>
@@ -60,6 +61,8 @@ const App = () => {
           path="/chat"
           element={isLoggedIn ? <Chat userID={loggedInUserID} /> : <Navigate to="/login" />}
         />
+          {/* RoomDetail 페이지에 대한 라우트 */}
+        <Route path="/room/:roomId" element={<RoomDetail />} />
       </Routes>
     </div>
   );

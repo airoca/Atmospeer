@@ -17,7 +17,7 @@ export default function Chat({ userID }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: message + '해당 분위기에 어울리는 유튜브 플레이리스트의 키워드를 팝송, 케이팝, 재즈, 클래식이라는 키워드 중 하나와 함께 포함해서 설명 없이, 특수 문자를 제외하고, 한글로, 짧게 한 문장으로 적어줘' }),
+        body: JSON.stringify({ message: message + '앞에 문장의 핵심 키워드를 사용하여 특수 문자를 포함하지 않은 \'~(하)ㄹ 때 듣는 플레이리스트\'라는 형식의 문장을 만들어줘. 설명을 제외하고 원하는 형식으로만 답해줘.' }),
       });
 
       if (!response.ok) {
