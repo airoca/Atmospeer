@@ -6,7 +6,6 @@ import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Youtube from '../Youtube/Youtube';
 import TextField from '@mui/material/TextField';
 import RoomDetail from './RoomDetail';
 
@@ -181,15 +180,6 @@ const handleDeleteRoom = async (roomId) => {
             <Typography variant="h6" component="div" gutterBottom>
               {room.roomName}
             </Typography>
-            {/* <img src={room.roomImage} alt={room.roomName} style={{ maxWidth: '100%', height: 'auto' }} /> */}
-            {/* YouTube 플레이어를 렌더링 */}
-            {/* {room.url.includes('youtube.com') ? (
-              <Youtube youtubeTitle={'현재 재생 중인 플레이리스트'} youtubeURL={room.url} positionStyles={positionStyles} />
-            ) : (
-              <Typography variant="body1" component="div">
-                Invalid YouTube URL
-              </Typography>
-            )} */}
             <Button
             variant="contained"
             color="inherit"
@@ -227,14 +217,6 @@ const handleDeleteRoom = async (roomId) => {
             <Typography variant="h6" component="div" gutterBottom>
               {room.roomName}
             </Typography>
-            {/* YouTube 플레이어를 렌더링 */}
-            {/* {room.url.includes('youtube.com') ? (
-              <Youtube youtubeTitle={'현재 재생 중인 플레이리스트'} youtubeURL={room.url} positionStyles={positionStyles} />
-            ) : (
-              <Typography variant="body1" component="div">
-                Invalid YouTube URL
-              </Typography>
-            )} */}
             <Button
             variant="contained"
             color="inherit"
