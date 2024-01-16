@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Youtube from '../Youtube/Youtube';
 import Room from '../Room/Room';
 import TextField from '@mui/material/TextField';
@@ -8,6 +8,16 @@ export default function Chat({ userID }) {
   const [youtubeURL, setURL] = useState('');
   const [youtubeTitle, setTitle] = useState('');
   const [imgURL, setImgURL] = useState('');
+
+  useEffect(() => {
+    // 페이지가 처음 마운트될 때와 unmount될 때 초기화 작업 수행
+    return () => {
+      setMessage('');
+      setURL('');
+      setTitle('');
+      setImgURL('');
+    };
+  }, []);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -20,7 +30,7 @@ export default function Chat({ userID }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: message + '앞에 문장의 핵심 키워드를 사용하여 특수 문자를 포함하지 않은 \'~(하)ㄹ 때 듣는 플레이리스트\'라는 형식의 문장을 만들어줘. 설명을 제외하고 원하는 형식으로만 답해줘.' }),
+        body: JSON.stringify({ message: message + '앞의 문장의 핵심 키워드를 뽑아 특수 문자를 포함하지 않은 \'~(하)ㄹ 때 듣는 음악 플레이리스트\'라는 형식으로 문장을 만들어서, 그 문장으로만 답해줘.' }),
       });
 
       if (!response.ok) {
@@ -78,7 +88,7 @@ export default function Chat({ userID }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: message + '앞에 문장의 핵심 키워드를 하나 뽑아서 단어 하나로 답해줘. 영어로 번역하여 영어 단어로 답해줘야해. 음악이나 노래와 관련된 단어는 제외해줘.' }),
+        body: JSON.stringify({ message: message + '앞의 문장의 핵심 키워드를 하나 뽑아서 영어로 번역한 후 단어 하나로 답해줘. 부가적인 설명은 필요없어. 음악이나 노래와 관련된 단어는 제외해줘.' }),
       });
 
       if (!response.ok) {
@@ -135,7 +145,7 @@ export default function Chat({ userID }) {
     <div className='Chat' style={positionStyles}>
       {/* <div>사용자 ID: {userID}</div> userID를 화면에 표시 */}
       <div>기분이 어떤가요? 무얼 하고 있나요? AtmosPEER에게 알려주세요!</div>
-      <div>당신이 들으면 좋아할 유튜브 플레이리스트를 알려줄게요!</div>
+      <div>당신이 들으면 좋아할 유튜브 플레이리스트를 추천해줄게요!</div>
       <div style={{ width: '100px', height: '10px' }}></div>
       <form onSubmit={onSubmitHandler} style={{ textAlign: 'center' }}>
         <TextField

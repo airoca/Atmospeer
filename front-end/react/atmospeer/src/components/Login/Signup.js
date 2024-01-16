@@ -68,33 +68,39 @@ export default function Signup() {
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
+                    <Box
+                        sx={{
+                            marginTop: 8,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                    >
                     <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
+                    <LockOutlinedIcon sx={{ borderRadius: '50%', bgcolor: '#553030', width: '2em', height: '2em', padding: '10px' }} />
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         회원가입
                     </Typography>
-                    <Box component="form" onSubmit={onSubmitHandler} sx={{
-mt: 1 }}>
-<TextField
-                         margin="normal"
-                         required
-                         fullWidth
-                         id="id"
-                         label="ID"
-                         name="id"
-                         autoComplete="id"
-                         autoFocus
-                     />
-<TextField
+                    <Box component="form" onSubmit={onSubmitHandler} sx={{ mt: 1 }}>
+                    <TextField
+                                            margin="normal"
+                                            required
+                                            fullWidth
+                                            id="id"
+                                            label="ID"
+                                            name="id"
+                                            autoComplete="id"
+                                            autoFocus
+                                            sx={{
+                                              '& .MuiOutlinedInput-root': {
+                                                '&.Mui-focused fieldset': {
+                                                  borderColor: 'black', // 입력이 완료된 후의 테두리 색
+                                                },
+                                              },
+                                            }}
+                      />
+                      <TextField
                          margin="normal"
                          required
                          fullWidth
@@ -103,8 +109,15 @@ mt: 1 }}>
                          type="password"
                          id="pw"
                          autoComplete="current-password"
+                         sx={{
+                          '& .MuiOutlinedInput-root': {
+                            '&.Mui-focused fieldset': {
+                              borderColor: 'black', // 입력이 완료된 후의 테두리 색
+                            },
+                          },
+                        }}
                      />
-<TextField
+                    <TextField
                          margin="normal"
                          required
                          fullWidth
@@ -113,27 +126,41 @@ mt: 1 }}>
                          type="text"
                          id="name"
                          autoComplete="name"
+                         sx={{
+                          '& .MuiOutlinedInput-root': {
+                            '&.Mui-focused fieldset': {
+                              borderColor: 'black', // 입력이 완료된 후의 테두리 색
+                            },
+                          },
+                        }}
                      />
-<Button
-type="submit"
-fullWidth
-variant="contained"
-sx={{ mt: 3, mb: 2 }}
->
-회원가입
-</Button>
-</Box>
-{isSuccess ? (
-<Typography variant="body2" color="success.main">
-회원가입에 성공했습니다.
-</Typography>
-) : (
-<Typography variant="body2" color="error.main">
-{signupAttemptCount === 0 ? '' : '회원가입에 실패했습니다.'}
-</Typography>
-)}
-</Box>
-</Container>
-</ThemeProvider>
-);
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      sx={{
+                        mt: 3,
+                        mb: 2,
+                        bgcolor: '#553030',
+                        '&:hover': {
+                          bgcolor: '#553030', // 버튼에 마우스를 올렸을 때의 배경 색상을 현재 색상으로 유지
+                        },
+                      }}
+                      >
+                      회원가입
+                    </Button>
+                  </Box>
+                  {isSuccess ? (
+                    <Typography variant="body2" color="success.main">
+                    회원가입에 성공했습니다.
+                    </Typography>
+                    ) : (
+                    <Typography variant="body2" color="error.main">
+                    {signupAttemptCount === 0 ? '' : '회원가입에 실패했습니다.'}
+                    </Typography>
+                  )}
+                  </Box>
+                </Container>
+              </ThemeProvider>
+  );
 }
