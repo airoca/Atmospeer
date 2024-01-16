@@ -124,7 +124,6 @@ app.post('/api/register', (req, res) => {
 
 // 채팅: 메시지 보내기
 app.post('/api/send', (req, res) => {
-
   const options = {
       hostname: '192.249.29.33',
       port: 8080,
@@ -166,6 +165,46 @@ app.get('/api/youtube', (req, res) => {
         hostname: '192.249.29.33',
         port: 8080,
         path: `/youtube?keyword=${encodeURIComponent(message)}`,
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    };
+
+    const externalReq = http.request(options, (externalRes) => {
+        let data = '';
+
+        externalRes.on('data', (chunk) => {
+            data += chunk;
+        });
+
+        externalRes.on('end', () => {
+            // 받은 데이터를 다시 클라이언트에게 응답
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ responseData: data }));
+        });
+    });
+
+    // 오류 처리
+    externalReq.on('error', (error) => {
+        console.error(`Error in external request: ${error.message}`);
+        res.end('Internal Server Error');
+    });
+
+    // 요청 종료
+    externalReq.end();
+});
+
+// image link 받아 오기
+app.get('/api/image', (req, res) => {
+    console.log("Received GET image request");
+
+    const message = req.query.keyword;
+    console.log('Image link query: ', message);
+    const options = {
+        hostname: '192.249.29.33',
+        port: 8080,
+        path: `/image?keyword=${encodeURIComponent(message)}`,
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'

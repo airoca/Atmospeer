@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import RoomDetail from './RoomDetail';
 
-const Room = ({ userID, youtubeURL}) => {
+const Room = ({ userID, youtubeURL, imgURL }) => {
   const theme = createTheme({ userID });
   const [rooms, setRooms] = useState([]);
   const [joiningRooms, setJoiningRooms] = useState([]);
@@ -93,7 +93,7 @@ const Room = ({ userID, youtubeURL}) => {
           masterUser: userID,
           url: youtubeURL,
           roomName: newAtmospeerName,
-          roomImage: 'https://i.pinimg.com/originals/79/15/9a/79159a57023f03a26daf440a83cdfba3.jpg',
+          roomImage: imgURL,
         }),
       });
 
