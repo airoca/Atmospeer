@@ -1,9 +1,6 @@
 import React from 'react';
 
 export default function Youtube({ youtubeTitle, youtubeURL, positionStyles }) {
-    // YouTube API Key
-    const apiKey = '';
-  
     // 동영상 ID 추출a
     const videoId = youtubeURL.split('v=')[1];
   
