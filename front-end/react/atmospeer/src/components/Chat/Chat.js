@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Youtube from '../Youtube/Youtube';
 import Room from '../Room/Room';
+import TextField from '@mui/material/TextField';
 
 export default function Chat({ userID }) {
   const [message, setMessage] = useState('');
@@ -132,13 +133,23 @@ export default function Chat({ userID }) {
 
   return (
     <div className='Chat' style={positionStyles}>
-      <div>사용자 ID: {userID}</div> {/* userID를 화면에 표시 */}
+      {/* <div>사용자 ID: {userID}</div> userID를 화면에 표시 */}
+      <div>기분이 어떤가요? 무얼 하고 있나요? AtmosPEER에게 알려주세요!</div>
+      <div>당신이 들으면 좋아할 유튜브 플레이리스트를 알려줄게요!</div>
       <div style={{ width: '100px', height: '10px' }}></div>
       <form onSubmit={onSubmitHandler} style={{ textAlign: 'center' }}>
-        <textarea
+        <TextField
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-        ></textarea>
+          sx={{
+            width: '800px',
+            '& .MuiOutlinedInput-root': {
+              '&.Mui-focused fieldset': {
+                borderColor: 'black', // 입력이 완료된 후의 테두리 색
+              },
+            },
+          }}
+        ></TextField>
         <div style={{ width: '100px', height: '10px' }}></div>
         <button type='submit'>입력</button>
       </form>
