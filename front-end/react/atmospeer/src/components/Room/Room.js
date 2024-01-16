@@ -114,7 +114,7 @@ const Room = ({ userID, youtubeURL, imgURL }) => {
   };
 
   // 방 삭제
-const handleDeleteRoom = async (roomId) => {
+  const handleDeleteRoom = async (roomId) => {
     try {
       const response = await fetch(`http://localhost:3001/api/eraseroom/${roomId}`, {
         method: 'DELETE',
@@ -139,7 +139,7 @@ const handleDeleteRoom = async (roomId) => {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="md">
-        <Paper elevation={3} style={{ padding: '20px', marginBottom: '20px' }}>
+        { youtubeURL && <Paper elevation={3} style={{ padding: '20px', marginBottom: '20px' }}>
           <Typography variant="h5" component="div" gutterBottom>
             새로운 AtmosPEER 만들기
           </Typography>
@@ -155,6 +155,8 @@ const handleDeleteRoom = async (roomId) => {
             만들기
           </Button>
         </Paper>
+        }
+        
 
         <div style={{ width: '100px', height: '50px' }}></div>
         <hr style={{ width: '100%' }} />

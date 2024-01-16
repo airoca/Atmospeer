@@ -8,21 +8,21 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { useNavigate } from 'react-router-dom';  // 추가
 
-const theme = createTheme(
-  {
+const theme = createTheme({
   palette: {
     background: {
-      default: '#ffffff', // 여기에 전체 배경 색상을 설정합니다.
+      default: '#ffffff',
     },
   },
-}
-);
+});
 
 const Login = ({ onLoginSuccess }) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [id, setID] = useState('');
   const [loginAttemptCount, setLoginAttemptCount] = useState(0);
+  const navigate = useNavigate();  // 추가
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -55,6 +55,7 @@ const Login = ({ onLoginSuccess }) => {
 
       if (parsedData) {
         onLoginSuccess(enteredID);
+        navigate('/chat');  // 로그인 성공 시 Chat 페이지로 이동
       }
     } catch (error) {
       console.error('Login error:', error.message);
@@ -73,8 +74,8 @@ const Login = ({ onLoginSuccess }) => {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'grey' }}>
-            <LockOutlinedIcon />
+          <Avatar sx={{ m: 1, bgcolor: 'white' }}>
+          <LockOutlinedIcon sx={{ borderRadius: '50%', bgcolor: '#553030', width: '2em', height: '2em', padding: '10px' }} />
           </Avatar>
           <Typography component="h1" variant="h5">
             로그인
@@ -89,6 +90,13 @@ const Login = ({ onLoginSuccess }) => {
               name="id"
               autoComplete="id"
               autoFocus
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '&.Mui-focused fieldset': {
+                    borderColor: 'black', // 입력이 완료된 후의 테두리 색
+                  },
+                },
+              }}
             />
             <TextField
               margin="normal"
@@ -99,11 +107,31 @@ const Login = ({ onLoginSuccess }) => {
               type="password"
               id="pw"
               autoComplete="current-password"
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '&.Mui-focused fieldset': {
+                    borderColor: 'black', // 입력이 완료된 후의 테두리 색
+                  },
+                },
+              }}
             />
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2,}}>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{
+                mt: 3,
+                mb: 2,
+                bgcolor: '#553030',
+                '&:hover': {
+                  bgcolor: '#553030', // 버튼에 마우스를 올렸을 때의 배경 색상을 현재 색상으로 유지
+                },
+              }}
+              >
               로그인
             </Button>
           </Box>
+
           {isSuccess ? (
             <Typography variant="body2" color="success.main">
               로그인에 성공했습니다.

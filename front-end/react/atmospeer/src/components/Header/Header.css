@@ -13,15 +13,19 @@
   nav ul {
     list-style: none;
     display: flex;
-    gap: 10px;
   }
   
   nav button {
-    padding: 5px;
+    margin: 10px;
+    background-color: #ffffff; /* 로그인 버튼 배경색 */
+    border: 2px solid #553030;
+    height: 30px;
+    width: 100px;
+    color: #553030;
   }
   
   nav a {
     text-decoration: none; /* 언더라인 제거 */
-    color: black; /* 링크 색상 수정 */
+    color: #553030; /* 링크 색상 수정 */
   }
   
