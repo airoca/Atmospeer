@@ -151,7 +151,23 @@ export default function Chat({ userID }) {
           }}
         ></TextField>
         <div style={{ width: '100px', height: '10px' }}></div>
-        <button type='submit'>입력</button>
+        <button 
+        type='submit'
+        style={{ 
+          backgroundColor: '#553030', // 버튼 배경색을 설정
+          color: 'white', // 버튼의 글씨 색을 흰색으로 설정
+          padding: '10px 20px', // 버튼의 패딩
+          border: 'none', // 테두리 제거
+          borderRadius: '5px', // 모서리 둥글게
+          cursor: 'pointer', // 마우스 오버시 커서 변경
+          marginTop: '12px', // 상단 여백
+          marginBottom: '16px' // 하단 여백
+        }}
+        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#553030'}
+        onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#553030'}
+        >
+        입력
+        </button>
       </form>
       {/* <div>{youtubeURL}</div> */}
       
