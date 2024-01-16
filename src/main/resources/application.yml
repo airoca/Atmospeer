@@ -13,3 +13,6 @@ chatgpt:
 youtube:
   api:
     key: AIzaSyCHMPzbV_1zONqcwOYkfucxAAPATywCb2s
+
+unsplash:
+  accessKey: Client-ID zbSIxL-dlgRb4nKwzf2TvWy6yDzIzb1E8iGHIoiueKQ
