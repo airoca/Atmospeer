@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
-import Login from './components/Login/Login';
-import Signup from './components/Login/Singup';
-import Chat from './components/Chat/Chat';
-import { Routes, Route, Link, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import './App.css'; // App.css 파일 추가
 import RoomDetail from './components/Room/RoomDetail';
-
-// const Home = () => (
-//   <div>
-//     <h2>AtmosPEER</h2>
-//   </div>
-// );
+import MainScreen from './components/Screen/MainScreen';
+import Login from './components/Login/Login';
+import Signup from './components/Login/Signup';
+import Chat from './components/Chat/Chat';
+import Header from './components/Header/Header';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -21,7 +17,6 @@ const App = () => {
     setIsLoggedIn(true);
     setLoggedInUserID(userID); // 로그인한 사용자의 ID를 상태로 저장
   };
-  
 
   const handleLogout = () => {
     // 로그아웃 시 호출되는 함수
@@ -29,40 +24,23 @@ const App = () => {
     setLoggedInUserID(null);
   };
 
+  const location = useLocation();
+
   return (
     <div className="App">
-      <header>
-        <h1><Link to="/">AtmosPEER</Link></h1>
-        {isLoggedIn ? (
-          <nav>
-            <ul>
-              <li><button><Link to="/chat">AtmosPEER</Link></button></li>
-              <li><button onClick={handleLogout}>로그아웃</button></li>
-            </ul>
-          </nav>
-        ) : (
-          <nav>
-            <ul>
-              <li><button><Link to="/login">로그인</Link></button></li>
-              <li><button><Link to="/signup">회원가입</Link></button></li>
-            </ul>
-          </nav>
-        )}
-      </header>
+      {/* Show Header component for all routes except MainScreen */}
+      {location.pathname !== '/' && (
+        <Header isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+      )}
 
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/signup" element={<Signup />} />
-        <Route
-          path="/login"
-          element={<Login onLoginSuccess={handleLogin}/>}
-        />
-        <Route
-          path="/chat"
-          element={isLoggedIn ? <Chat userID={loggedInUserID} /> : <Navigate to="/login" />}
-        />
-          {/* RoomDetail 페이지에 대한 라우트 */}
-        <Route path="/room/:roomId" element={<RoomDetail />} />
+        <Route path="/" element={<MainScreen />} />
+        {/* Show login page when image is clicked */}
+            <Route path="/chat" element={<Chat userID={loggedInUserID} />} />
+            <Route path="/signup" element={<Signup />} />
+            {/* RoomDetail 페이지에 대한 라우트 */}
+            <Route path="/room/:roomId" element={<RoomDetail />} />
+          <Route path="/login" element={<Login onLoginSuccess={handleLogin} />} />
       </Routes>
     </div>
   );
