@@ -144,8 +144,8 @@ export default function Chat({ userID }) {
   return (
     <div className='Chat' style={positionStyles}>
       {/* <div>사용자 ID: {userID}</div> userID를 화면에 표시 */}
-      <div>기분이 어떤가요? 무얼 하고 있나요? AtmosPEER에게 알려주세요!</div>
-      <div>당신이 들으면 좋아할 유튜브 플레이리스트를 추천해줄게요!</div>
+      <div style={{ fontFamily: "'Nanum Pen Script', cursive", fontSize: "20px" }}>기분이 어떤가요? 무얼 하고 있나요? AtmosPEER에게 알려주세요!</div>
+      <div style={{ fontFamily: "'Nanum Pen Script', cursive", fontSize: "20px" }}>당신이 들으면 좋아할 유튜브 플레이리스트를 추천해줄게요!</div>
       <div style={{ width: '100px', height: '10px' }}></div>
       <form onSubmit={onSubmitHandler} style={{ textAlign: 'center' }}>
         <TextField
