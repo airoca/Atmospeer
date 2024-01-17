@@ -9,6 +9,10 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
+import window from './window.png';
+import tv from './tv.png';
+import couch from './sofa.png';
+
 const RoomDetail = () => {
   const { state } = useLocation();
   const room = state?.room;
@@ -46,18 +50,6 @@ const RoomDetail = () => {
     fetchDetails();
   }, [room.roomId]);
 
-  // const containerStyle = {
-  //   backgroundImage: `url(${room.roomImage})`,
-  //   backgroundSize: 'cover',
-  //   backgroundPosition: 'center',
-  //   height: '300vh',
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   color: 'white',
-  // };
-
   const positionStyles = {
     display: 'flex',
     justifyContent: 'center',
@@ -92,47 +84,87 @@ const RoomDetail = () => {
   };
 
   return (
-    // <div style={containerStyle}>
-    <div>
-      <h1>Room Detail</h1>
-      <p>Room ID: {room.roomId}</p>
-      <p>Room name: {room.roomName}</p>
-      <p>Room master: {room.masterUser}</p>
-      <Youtube youtubeTitle={'현재 재생 중인 플레이리스트'} youtubeURL={room.url} positionStyles={positionStyles} />
+    <div >
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <h1>{room.roomName}</h1>
+        <p>ID: {room.roomId}</p>
+        <p>방장: {room.masterUser}</p>
+      </div>
+
+      <div style={{ width: '100px', height: '50px' }}></div>
+
+      <div style={{ position: 'relative', width: '100%', height: '500px' }}>
+          {/* window.png */}
+          <div style={{ position: 'absolute', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+            <img src={window} alt="Window" style={{ width: '500px', height: '500px' }} />
+          </div>
+
+          {/* room.roomImage */}
+          <div style={{ position: 'absolute', zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+            <img
+              src={room.roomImage}
+              alt="Room Image"
+              style={{ width: '490px', height: '460px', objectFit: 'cover' }}
+            />
+          </div>
+        </div>
+        <div style={{ width: '100px', height: '50px' }}></div>
+        <div>
+          <Youtube youtubeTitle='같이 듣고 있는 플레이리스트' youtubeURL={room.url} positionStyles={positionStyles} />
+        </div>
+
+        
+
+
+      <div style={{ width: '100px', height: '100px' }}></div>
 
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="md">
+
           {/* 멤버 초대하기 */}
-          <Typography variant="h5" component="div" gutterBottom>
-            Member 초대하기
-          </Typography>
-          <TextField
-            label="User ID"
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            value={newUserId}
-            onChange={(e) => setNewUserId(e.target.value)}
-          />
-          <Button variant="contained" color="primary" onClick={handleInviteUser}>
-            초대하기
-          </Button>
+          <Paper elevation={3} style={{ padding: '16px', marginBottom: '16px', border: '2px solid #553030', backgroundColor: 'white' }}>
+            <Typography variant="h5" component="div" gutterBottom style={{color: '#553030'}}>
+              새로운 멤버 초대하기
+            </Typography>
+            <hr style={{ width: '100%' }} />
+            <div style={{ width: '100px', height: '20px' }}></div>
+            <TextField
+              label="User ID"
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              value={newUserId}
+              onChange={(e) => setNewUserId(e.target.value)}
+            />
+            <Button variant="contained" color="grey" onClick={handleInviteUser}>
+              초대하기
+            </Button>
+          </Paper>
+
+          <div style={{ width: '100px', height: '30px' }}></div>
 
           {/* 멤버 불러오기 */}
-          <Typography variant="h5" component="div" gutterBottom>
-            참여 중인 Members
-          </Typography>
-          {members.map((member) => (
-            <Paper key={member.id} elevation={3}>
-              <Typography variant="h6" component="div" gutterBottom>
-                {member.name}
-              </Typography>
-            </Paper>
-          ))}
+          <Paper elevation={3} style={{ padding: '16px', marginBottom: '16px', border: '2px solid #553030' , backgroundColor: 'white'}}>
+            <Typography variant="h5" component="div" gutterBottom>
+              참여 중인 Members
+            </Typography>
+            <hr style={{ width: '100%' }} />
+            <div style={{ width: '100px', height: '20px' }}></div>
+            {members.map((member) => (
+              <Paper key={member.id} elevation={3}>
+                <Typography variant="h6" component="div" gutterBottom>
+                  {member.name}
+                </Typography>
+              </Paper>
+            ))}
+          </Paper>
         </Container>
       </ThemeProvider>
-    </div>
-  );
+
+
+      <div style={{ width: '100px', height: '100px' }}></div>
+  </div>
+);
 };
 
 export default RoomDetail;
