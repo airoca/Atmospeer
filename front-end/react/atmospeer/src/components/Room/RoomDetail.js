@@ -111,14 +111,16 @@ const RoomDetail = () => {
         
         
         <div style={{ position: 'relative', width: '100%', height: '500px' }}>
-        {/* YouTube 컴포넌트 */}
-        <div style={{ position: 'absolute', zIndex: 2, width: '100%', height: '100%' }}>
-          <Youtube youtubeURL={room.url} positionStyles={positionStyles} />
-        </div>
 
-        {/* TV 이미지 */}
-        <div style={{ position: 'absolute', zIndex: 1, top: '-27px', left: '343px', width: '100%', height: '100%' }}>
-          <img src={tv} alt="Television" style={{ width: '53%', height: '130%', pointerEvents: 'none' }} />
+        <div style={{ position: 'relative', width: '100%', height: '500px' }}>
+          {/* TV 이미지 */}
+          <div style={{ position: 'absolute', zIndex: 1, top: '50px', width: '100%', height: '100%' , display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <img src={tv} alt="Television" style={{ width: '800px', height: '100%', objectFit: 'cover' }} />
+          </div>
+          {/* YouTube 컴포넌트 */}
+          <div style={{ position: 'absolute', zIndex: 2, width: '100%', height: '100%', ...positionStyles }}>
+            <Youtube youtubeURL={room.url} positionStyles={positionStyles} />
+          </div>
         </div>
 
         {/* 곰인형 이미지 */}
@@ -127,7 +129,7 @@ const RoomDetail = () => {
         </div>
 
         {/* 커피 이미지 */}
-        <div style={{ position: 'absolute', zIndex: 1, top: '200px', left: '1050px', width: '100%', height: '100%' }}>
+        <div style={{ position: 'absolute', zIndex: 1, top: '200px', left: '1150px', width: '100%', height: '100%' }}>
           <img src={coffee} alt="Television" style={{ width: '30%', height: '90%', pointerEvents: 'none' }} />
         </div>
       </div>
