@@ -117,8 +117,8 @@ const RoomDetail = () => {
         </div>
 
         {/* TV 이미지 */}
-        <div style={{ position: 'absolute', zIndex: 1, top: '-27px', left: '376px', width: '100%', height: '100%' }}>
-          <img src={tv} alt="Television" style={{ width: '50%', height: '130%', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', zIndex: 1, top: '-27px', left: '343px', width: '100%', height: '100%' }}>
+          <img src={tv} alt="Television" style={{ width: '53%', height: '130%', pointerEvents: 'none' }} />
         </div>
 
         {/* 곰인형 이미지 */}
@@ -165,7 +165,7 @@ const RoomDetail = () => {
           {/* 멤버 불러오기 */}
           <Paper elevation={3} style={{ padding: '16px', marginBottom: '16px', border: '2px solid #553030' , backgroundColor: 'white'}}>
             <Typography variant="h5" component="div" gutterBottom>
-              참여 중인 Members
+              참여 중인 멤버
             </Typography>
             <hr style={{ width: '100%' }} />
             <div style={{ width: '100px', height: '20px' }}></div>

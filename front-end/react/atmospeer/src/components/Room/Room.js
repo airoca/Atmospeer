@@ -15,6 +15,7 @@ const Room = ({ userID, youtubeURL, imgURL }) => {
   const [rooms, setRooms] = useState([]);
   const [joiningRooms, setJoiningRooms] = useState([]);
   const [newAtmospeerName, setNewAtmospeerName] = useState('');
+  const [newAtmospeerCreated, setNewAtmospeerCreated] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,7 +45,7 @@ const Room = ({ userID, youtubeURL, imgURL }) => {
     };
 
     fetchRooms();
-  }, [userID]);
+  }, [userID, newAtmospeerCreated]);
 
   useEffect(() => {
     const fetchJoiningRooms = async () => {
@@ -104,6 +105,8 @@ const Room = ({ userID, youtubeURL, imgURL }) => {
 
       const data = await response.json();
       console.log('AtmosPEER Created:', data);
+
+      setNewAtmospeerCreated(true);
     } catch (error) {
       console.error('Create AtmosPEER error:', error.message);
     }
@@ -165,7 +168,7 @@ const Room = ({ userID, youtubeURL, imgURL }) => {
         <div style={{ width: '100px', height: '50px' }}></div>
 
         {/* 방장 정보 렌더링 */}
-        <Typography variant="h5" component="div" gutterBottom>
+        <Typography variant="h5" component="div" gutterBottom style={{color: '#553030'}}>
           <strong>방장으로 참여 중인 AtmosPEER</strong>
         </Typography>
         {rooms.map((room) => (
@@ -261,7 +264,7 @@ const Room = ({ userID, youtubeURL, imgURL }) => {
         <div style={{ width: '100px', height: '50px' }}></div>
 
         {/* 참가 정보 렌더링 */}
-        <Typography variant="h5" component="div" gutterBottom>
+        <Typography variant="h5" component="div" gutterBottom style={{color: '#553030'}}>
           <strong>참가자로 참여 중인 AtmosPEER</strong>
         </Typography>
         {joiningRooms.map((room) => (
