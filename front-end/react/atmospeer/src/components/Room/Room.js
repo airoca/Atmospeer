@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import RoomDetail from './RoomDetail';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Room = ({ userID, youtubeURL, imgURL }) => {
   const theme = createTheme({ userID });
@@ -165,13 +166,15 @@ const Room = ({ userID, youtubeURL, imgURL }) => {
 
         {/* 방장 정보 렌더링 */}
         <Typography variant="h5" component="div" gutterBottom>
-          방장으로 참여 중인 AtmosPEER
+          <strong>방장으로 참여 중인 AtmosPEER</strong>
         </Typography>
         {rooms.map((room) => (
           <Paper
             key={room.roomId}
             elevation={3}
             style={{
+                display: 'flex',  // flex 레이아웃 사용
+                justifyContent: 'space-between',  // 양 끝에 요소 정렬
                 padding: '20px',
                 marginBottom: '20px',
                 cursor: 'pointer',
@@ -180,18 +183,75 @@ const Room = ({ userID, youtubeURL, imgURL }) => {
               }}
             onClick={() => goToRoomDetail(room)}  // 클릭 시 RoomDetail 페이지로 이동
           >
-            <Typography variant="h6" component="div" gutterBottom>
-              {room.roomName}
-            </Typography>
+
+            <div style={{
+                position: 'relative',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '200px',
+                height: '80px',
+                background: 'linear-gradient(135deg, #f8f6f5, 30%, #f8f6f5)',
+                boxShadow: '3px 3px 2px #808080',
+                transform: 'rotate(10deg)',
+                transformOrigin: 'top left'
+              }}>
+              <div style={{
+                  position: 'absolute',
+                  left: '5px',
+                  width: '15px',
+                  height: '12.5px'
+                }}>
+                <div style={{
+                    position: 'absolute',
+                    top: '4.5px',
+                    left: '-2px',
+                    width: '8.75px',
+                    height: '8.75px',
+                    borderRadius: '50%',
+                    background: 'radial-gradient(#c9bf8d, 20%, rgba(201, 191, 141, 0))'
+                  }}></div>
+                <div style={{
+                    position: 'absolute',
+                    width: '1.25px',
+                    height: '5px',
+                    background: 'linear-gradient(to right, #808080, 40%, #eae8e8, 50%, #808080)',
+                    borderRadius: '0 0 30% 30%',
+                    transform: 'rotate(50deg)',
+                    transformOrigin: 'bottom left',
+                    top: '3.75px',
+                    borderBottom: '1px solid #808080'
+                  }}></div>
+                <div style={{
+                    position: 'absolute',
+                    right: '3.75px',
+                    width: '8.75px',
+                    height: '8.75px',
+                    borderRadius: '50%',
+                    backgroundColor: '#9b2c0b',
+                    background: 'radial-gradient(circle at bottom right, #c0786c, 25%, #4e0f04, 90%, #9b2c0b)'
+                  }}></div>
+              </div>
+              <div style={{ fontFamily: "'Nanum Pen Script', cursive", fontSize: "20px" }}>{room.roomName}</div>
+            </div>
+
             <Button
-            variant="contained"
-            color="inherit"
-            onClick={(e) => {
-                e.stopPropagation();  // 이벤트 전파 막기
-                handleDeleteRoom(room.roomId);
-            }}
+              variant="contained"
+              style={{
+                backgroundColor: '#000000', // 연한 붉은색 바탕
+                color: 'white', // 흰색 글씨
+                borderRadius: '50%', // 원형 버튼
+                width: '30px',  // 버튼의 너비
+                height: '30px', // 버튼의 높이
+                minWidth: '30px', // 최소 너비 설정
+                padding: 0, // 내부 여백 제거
+              }}
+              onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeleteRoom(room.roomId);
+              }}
             >
-            삭제
+            <CloseIcon />
             </Button>
           </Paper>
         ))}
@@ -202,7 +262,7 @@ const Room = ({ userID, youtubeURL, imgURL }) => {
 
         {/* 참가 정보 렌더링 */}
         <Typography variant="h5" component="div" gutterBottom>
-          참가자로 참여 중인 AtmosPEER
+          <strong>참가자로 참여 중인 AtmosPEER</strong>
         </Typography>
         {joiningRooms.map((room) => (
           <Paper
@@ -217,19 +277,56 @@ const Room = ({ userID, youtubeURL, imgURL }) => {
               }}
             onClick={() => goToRoomDetail(room)}  // 클릭 시 RoomDetail 페이지로 이동
           >
-            <Typography variant="h6" component="div" gutterBottom>
-              {room.roomName}
-            </Typography>
-            <Button
-            variant="contained"
-            color="inherit"
-            onClick={(e) => {
-                e.stopPropagation();  // 이벤트 전파 막기
-                handleDeleteRoom(room.roomId);
-            }}
-            >
-            삭제
-            </Button>
+            <div style={{
+                position: 'relative',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '200px',
+                height: '80px',
+                background: 'linear-gradient(135deg, #f8f6f5, 30%, #f8f6f5)',
+                boxShadow: '3px 3px 2px #808080',
+                transform: 'rotate(10deg)',
+                transformOrigin: 'top left'
+              }}>
+              <div style={{
+                  position: 'absolute',
+                  left: '5px',
+                  width: '15px',
+                  height: '12.5px'
+                }}>
+                <div style={{
+                    position: 'absolute',
+                    top: '4.5px',
+                    left: '-2px',
+                    width: '8.75px',
+                    height: '8.75px',
+                    borderRadius: '50%',
+                    background: 'radial-gradient(#c9bf8d, 20%, rgba(201, 191, 141, 0))'
+                  }}></div>
+                <div style={{
+                    position: 'absolute',
+                    width: '1.25px',
+                    height: '5px',
+                    background: 'linear-gradient(to right, #808080, 40%, #eae8e8, 50%, #808080)',
+                    borderRadius: '0 0 30% 30%',
+                    transform: 'rotate(50deg)',
+                    transformOrigin: 'bottom left',
+                    top: '3.75px',
+                    borderBottom: '1px solid #808080'
+                  }}></div>
+                <div style={{
+                    position: 'absolute',
+                    right: '3.75px',
+                    width: '8.75px',
+                    height: '8.75px',
+                    borderRadius: '50%',
+                    backgroundColor: '#9b2c0b',
+                    background: 'radial-gradient(circle at bottom right, #c0786c, 25%, #4e0f04, 90%, #9b2c0b)'
+                  }}></div>
+              </div>
+              <div style={{ fontFamily: "'Nanum Pen Script', cursive", fontSize: "20px" }}>{room.roomName}</div>
+            </div>
           </Paper>
         ))}
 
