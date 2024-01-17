@@ -140,8 +140,8 @@ const Room = ({ userID, youtubeURL, imgURL }) => {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="md">
-        { youtubeURL && <Paper elevation={3} style={{ padding: '20px', marginBottom: '20px' }}>
-          <Typography variant="h5" component="div" gutterBottom>
+        { youtubeURL && <Paper elevation={3} style={{ padding: '20px', marginBottom: '20px' , border: '2px solid #553030' , backgroundColor: 'white'}}>
+          <Typography variant="h5" component="div" gutterBottom style={{color: '#553030'}}>
             새로운 AtmosPEER 만들기
           </Typography>
           <TextField
@@ -152,7 +152,7 @@ const Room = ({ userID, youtubeURL, imgURL }) => {
             value={newAtmospeerName}
             onChange={(e) => setNewAtmospeerName(e.target.value)}
           />
-          <Button variant="contained" color="primary" onClick={handleCreateAtmospeer}>
+          <Button variant="contained" color="grey" onClick={handleCreateAtmospeer}>
             만들기
           </Button>
         </Paper>

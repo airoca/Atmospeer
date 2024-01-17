@@ -10,13 +10,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';  // 추가
 
-const theme = createTheme({
-  palette: {
-    background: {
-      default: '#ffffff',
-    },
-  },
-});
+const theme = createTheme({});
 
 const Login = ({ onLoginSuccess }) => {
   const [isSuccess, setIsSuccess] = useState(false);
