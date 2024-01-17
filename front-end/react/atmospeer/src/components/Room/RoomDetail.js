@@ -10,8 +10,9 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
 import window from './window.png';
-import tv from './tv.png';
-import couch from './sofa.png';
+import tv from './television.png';
+import teddybear from './teddybear.png';
+import coffee from './coffee.png';
 
 const RoomDetail = () => {
   const { state } = useLocation();
@@ -86,9 +87,8 @@ const RoomDetail = () => {
   return (
     <div >
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <h1>{room.roomName}</h1>
-        <p>ID: {room.roomId}</p>
-        <p>방장: {room.masterUser}</p>
+        <h1><div style={{ fontFamily: "'Nanum Pen Script', cursive", fontSize: "60px", color: "#553030"}}>{room.roomName}</div></h1>
+        <p><strong>방장: </strong>{room.masterUser}</p>
       </div>
 
       <div style={{ width: '100px', height: '50px' }}></div>
@@ -108,15 +108,34 @@ const RoomDetail = () => {
             />
           </div>
         </div>
-        <div style={{ width: '100px', height: '50px' }}></div>
-        <div>
-          <Youtube youtubeTitle='같이 듣고 있는 플레이리스트' youtubeURL={room.url} positionStyles={positionStyles} />
+        
+        
+        <div style={{ position: 'relative', width: '100%', height: '500px' }}>
+        {/* YouTube 컴포넌트 */}
+        <div style={{ position: 'absolute', zIndex: 2, width: '100%', height: '100%' }}>
+          <Youtube youtubeURL={room.url} positionStyles={positionStyles} />
         </div>
+
+        {/* TV 이미지 */}
+        <div style={{ position: 'absolute', zIndex: 1, top: '-27px', left: '376px', width: '100%', height: '100%' }}>
+          <img src={tv} alt="Television" style={{ width: '50%', height: '130%', pointerEvents: 'none' }} />
+        </div>
+
+        {/* 곰인형 이미지 */}
+        <div style={{ position: 'absolute', zIndex: 1, top: '200px', left: '0px', width: '100%', height: '100%' }}>
+          <img src={teddybear} alt="Television" style={{ width: '30%', height: '90%', pointerEvents: 'none' }} />
+        </div>
+
+        {/* 커피 이미지 */}
+        <div style={{ position: 'absolute', zIndex: 1, top: '200px', left: '1050px', width: '100%', height: '100%' }}>
+          <img src={coffee} alt="Television" style={{ width: '30%', height: '90%', pointerEvents: 'none' }} />
+        </div>
+      </div>
 
         
 
 
-      <div style={{ width: '100px', height: '100px' }}></div>
+      <div style={{ width: '100px', height: '200px' }}></div>
 
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="md">
@@ -152,8 +171,17 @@ const RoomDetail = () => {
             <div style={{ width: '100px', height: '20px' }}></div>
             {members.map((member) => (
               <Paper key={member.id} elevation={3}>
-                <Typography variant="h6" component="div" gutterBottom>
-                  {member.name}
+                <Typography 
+                  variant="subtitle1" 
+                  component="div" 
+                  gutterBottom
+                  style={{ 
+                    fontWeight: 'bold', 
+                    padding: '10px', // Adjust the padding as needed
+                    fontSize: 'smaller' // Adjust the font size as needed
+                  }}
+                  >
+                    😊 {member.name}
                 </Typography>
               </Paper>
             ))}
