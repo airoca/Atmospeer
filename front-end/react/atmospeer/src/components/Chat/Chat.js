@@ -8,6 +8,7 @@ export default function Chat({ userID }) {
   const [youtubeURL, setURL] = useState('');
   const [youtubeTitle, setTitle] = useState('');
   const [imgURL, setImgURL] = useState('');
+  const [loading, setLoading] = useState(false); // 로딩 상태 추가
 
   useEffect(() => {
     // 페이지가 처음 마운트될 때와 unmount될 때 초기화 작업 수행
@@ -22,6 +23,8 @@ export default function Chat({ userID }) {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     console.log(message);
+
+    setLoading(true); // 로딩 시작
 
     // chatGPT + youtube link
     try {
@@ -79,10 +82,14 @@ export default function Chat({ userID }) {
 
     } catch (error) {
       console.error('Error during fetch:', error);
+    } finally {
+      setLoading(false); // 로딩 종료
     }
 
     // chatGPT + image link
     try {
+      setLoading(true); // 로딩 시작
+
       const response = await fetch(`http://localhost:3001/api/send`, {
         method: 'POST',
         headers: {
@@ -129,6 +136,8 @@ export default function Chat({ userID }) {
 
     } catch (error) {
       console.error('Error during fetch:', error);
+    } finally {
+      setLoading(false); // 로딩 종료
     }
   };
 
@@ -143,7 +152,8 @@ export default function Chat({ userID }) {
 
   return (
     <div className='Chat' style={positionStyles}>
-      {/* <div>사용자 ID: {userID}</div> userID를 화면에 표시 */}
+      {loading && <div style={{color:'#553030'}}>Loading...</div>}
+
       <div style={{ fontFamily: "'Nanum Pen Script', cursive", fontSize: "20px" }}>기분이 어떤가요? 무얼 하고 있나요? AtmosPEER에게 알려주세요!</div>
       <div style={{ fontFamily: "'Nanum Pen Script', cursive", fontSize: "20px" }}>당신이 들으면 좋아할 유튜브 플레이리스트를 추천해줄게요!</div>
       <div style={{ width: '100px', height: '10px' }}></div>
@@ -162,42 +172,36 @@ export default function Chat({ userID }) {
         ></TextField>
         <div style={{ width: '100px', height: '10px' }}></div>
         <button 
-        type='submit'
-        style={{ 
-          backgroundColor: '#553030', // 버튼 배경색을 설정
-          color: 'white', // 버튼의 글씨 색을 흰색으로 설정
-          padding: '10px 20px', // 버튼의 패딩
-          border: 'none', // 테두리 제거
-          borderRadius: '5px', // 모서리 둥글게
-          cursor: 'pointer', // 마우스 오버시 커서 변경
-          marginTop: '12px', // 상단 여백
-          marginBottom: '16px' // 하단 여백
-        }}
-        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#553030'}
-        onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#553030'}
+          type='submit'
+          style={{ 
+            backgroundColor: '#553030', // 버튼 배경색을 설정
+            color: 'white', // 버튼의 글씨 색을 흰색으로 설정
+            padding: '10px 20px', // 버튼의 패딩
+            border: 'none', // 테두리 제거
+            borderRadius: '5px', // 모서리 둥글게
+            cursor: 'pointer', // 마우스 오버시 커서 변경
+            marginTop: '12px', // 상단 여백
+            marginBottom: '16px' // 하단 여백
+          }}
+          onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#553030'}
+          onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#553030'}
         >
-        입력
+          입력
         </button>
       </form>
-      {/* <div>{youtubeURL}</div> */}
-      
       <div style={{ width: '100px', height: '50px' }}></div>
-      {/* youtube 영상 띄우기 */}
+      
+      {loading && <div style={{color:'#553030'}}>Loading...</div>}
+
       {youtubeURL && (
         <div className="YoutubeContainer">
-          {/* Youtube 영상 띄우기 */}
           <Youtube youtubeTitle={youtubeTitle} youtubeURL={youtubeURL} positionStyles={positionStyles}/>
         </div>
       )}
 
-      
       <div style={{ width: '100px', height: '50px' }}></div>
-      {/* 소속되어 있는 room 띄우기 */}
+
       <Room userID={userID} youtubeURL={youtubeURL} imgURL={imgURL} />
-
-
-      
-      
     </div>
   );
 }
